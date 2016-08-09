@@ -11,14 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160803083617) do
+ActiveRecord::Schema.define(:version => 20160803121601) do
 
   create_table "countries", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  create_table "matches", :force => true do |t|
+  create_table "match_events", :force => true do |t|
+    t.integer  "match_id",             :null => false
     t.integer  "league_id",            :null => false
     t.integer  "season_id",            :null => false
     t.datetime "start_time"
@@ -35,9 +36,41 @@ ActiveRecord::Schema.define(:version => 20160803083617) do
     t.integer  "goals_away"
     t.integer  "goals_half_time_away"
     t.integer  "penalty_goals_away"
+    t.integer  "team_id",              :null => false
+    t.string   "type",                 :null => false
+    t.integer  "minute"
+    t.integer  "additional_minute"
+    t.integer  "player1_id"
+    t.integer  "player2_id"
+    t.string   "info"
+    t.integer  "current_goals_home"
+    t.integer  "current_goals_away"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  create_table "matches", :force => true do |t|
+    t.integer  "league_id",            :null => false
+    t.integer  "season_id",            :null => false
+    t.datetime "start_time"
+    t.datetime "half_start_time"
+    t.string   "status"
+    t.integer  "round"
+    t.integer  "venue_id"
+    t.integer  "team_id_home",         :null => false
+    t.string   "team_name_home",       :null => false
+    t.integer  "goals_home"
+    t.integer  "goals_half_time_home"
+    t.integer  "penalty_goals_home"
+    t.integer  "team_id_away",         :null => false
+    t.string   "team_name_away",       :null => false
+    t.integer  "goals_away"
+    t.integer  "goals_half_time_away"
+    t.integer  "penalty_goals_away"
     t.integer  "shots_on_home"
     t.integer  "shots_off_home"
     t.integer  "shots_blocked_home"
+    t.integer  "assists_home"
     t.integer  "cards_yellow_home"
     t.integer  "cards_red_home"
     t.integer  "corners_home"
@@ -46,6 +79,7 @@ ActiveRecord::Schema.define(:version => 20160803083617) do
     t.integer  "shots_on_away"
     t.integer  "shots_off_away"
     t.integer  "shots_blocked_away"
+    t.integer  "assists_away"
     t.integer  "cards_yellow_away"
     t.integer  "cards_red_away"
     t.integer  "corners_away"
@@ -64,6 +98,8 @@ ActiveRecord::Schema.define(:version => 20160803083617) do
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
   end
+
+  add_index "matches", ["remote_id", "remote_source"], :name => "index_matches_on_remote_id_and_remote_source", :unique => true
 
   create_table "play_events", :force => true do |t|
     t.integer  "sport_id",   :null => false

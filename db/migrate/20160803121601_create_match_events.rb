@@ -1,7 +1,7 @@
 class CreateMatchEvents < ActiveRecord::Migration
   def change
     create_table :match_events do |t|
-      
+
       t.integer   :match_id, null: false
       t.integer   :league_id, null: false
       t.integer   :season_id, null: false
@@ -25,6 +25,8 @@ class CreateMatchEvents < ActiveRecord::Migration
       t.integer   :team_id, null: false
       t.string    :type, null: false
       t.integer   :minute
+      t.integer   :additional_minute
+      t.datetime  :time
       t.integer   :player1_id
       t.integer   :player2_id
       t.string    :info

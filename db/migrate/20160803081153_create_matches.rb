@@ -24,6 +24,7 @@ class CreateMatches < ActiveRecord::Migration
     	t.integer 	:shots_on_home
     	t.integer 	:shots_off_home
     	t.integer 	:shots_blocked_home
+    	t.integer		:assists_home
     	t.integer		:cards_yellow_home
     	t.integer		:cards_red_home
     	t.integer		:corners_home
@@ -33,6 +34,7 @@ class CreateMatches < ActiveRecord::Migration
     	t.integer 	:shots_on_away
     	t.integer 	:shots_off_away
     	t.integer 	:shots_blocked_away
+    	t.integer		:assists_away
     	t.integer		:cards_yellow_away
     	t.integer		:cards_red_away
     	t.integer		:corners_away
@@ -54,5 +56,7 @@ class CreateMatches < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :matches, [:remote_id, :remote_source], unique: true
   end
 end
