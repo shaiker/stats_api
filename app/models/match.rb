@@ -48,7 +48,7 @@ class Match < ActiveRecord::Base
 
     home_team_data = match_data['boxscores'].find { |team_data| team_data['teamId'].to_i == self.team_id_home }
     self.shots_on_home = home_team_data['teamStats']['shotsOnGoal']
-    self.shots_blocked_home = home_team_data['teamStats']['shots']['blocked']
+    self.shots_blocked_home = home_team_data['teamStats']['shots']['blocked'] || 0
     self.shots_off_home = home_team_data['teamStats']['shots']['total'] - self.shots_on_home - self.shots_blocked_home
     self.corners_home =  home_team_data['teamStats']['cornerKicks']
     self.possession_home = home_team_data['teamStats']['possessionPercentage']
@@ -56,7 +56,7 @@ class Match < ActiveRecord::Base
 
     away_team_data = match_data['boxscores'].find { |team_data| team_data['teamId'].to_i == self.team_id_away }
     self.shots_on_away = away_team_data['teamStats']['shotsOnGoal']
-    self.shots_blocked_away = away_team_data['teamStats']['shots']['blocked']
+    self.shots_blocked_away = away_team_data['teamStats']['shots']['blocked'] || 0
     self.shots_off_away = away_team_data['teamStats']['shots']['total'] - self.shots_on_away - self.shots_blocked_away
     self.corners_away =  away_team_data['teamStats']['cornerKicks']
     self.possession_away = away_team_data['teamStats']['possessionPercentage']
@@ -106,5 +106,10 @@ end
 # season = Season.last
 # Team.find_each do |team|
 # 	Match.init_from_api_for_team_and_season(team, season)
+# 	sleep(2)
+# end
+
+# Match.where('id >= 776').where(remote_source: 'Stats').find_each do |match| 
+# 	MatchEvent::Base.from_api_for_match(match)
 # 	sleep(2)
 # end

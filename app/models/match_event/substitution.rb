@@ -1,5 +1,6 @@
 module MatchEvent
   class Substitution < Base
+    
     def match_event_from_data(match_event_data)
       self.player2_id = match_event_data['playerIn']['playerId']
       self.info = "#{match_event_data['playerOut']['displayName']} Out - #{match_event_data['playerIn']['displayName']} In"

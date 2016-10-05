@@ -30,6 +30,10 @@ class SoccerApi
 		make_request("/stats/#{SPORT}/#{@leaguePath}/events/#{match_remote_event_id}", { linescore: true, box: true, pbp: true, breakdowns: true })
 	end
 
+	def players(since_year)
+		make_request("/stats/#{SPORT}/#{@leaguePath}/participants/", { sinceYearLast: since_year })
+	end
+
 	private 
 	def make_request(endpoint, params = {})
 		params = params.merge({

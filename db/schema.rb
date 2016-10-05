@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160803121601) do
+ActiveRecord::Schema.define(:version => 20160809155658) do
 
   create_table "countries", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20160803121601) do
     t.string   "type",                 :null => false
     t.integer  "minute"
     t.integer  "additional_minute"
+    t.datetime "time"
     t.integer  "player1_id"
     t.integer  "player2_id"
     t.string   "info"
@@ -107,6 +108,14 @@ ActiveRecord::Schema.define(:version => 20160803121601) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "players", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "display_name"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "seasons", :force => true do |t|
