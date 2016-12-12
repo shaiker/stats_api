@@ -86,18 +86,18 @@ class Match < ActiveRecord::Base
 
 	def goals_for_side_at_time(side, minute, additional_minute = 0)
 		team_id = side == :home ? team_id_home : team_id_away
-		MatchEvent::Goal.where(match_id: id, team_id: team_id).where("minute <= ? AND additional_minute <= ?", minute, additional_minute).count
+		MatchEvent::Goal.where(match_id: id, event_team_id: team_id).where("minute <= ? AND additional_minute <= ?", minute, additional_minute).count
 	end
 
 	def fill_data_base_on_events
-		self.assists_home = MatchEvent::Goal.where(match_id: id, team_id: team_id_home).where('player2_id IS NOT NULL').count
-		self.assists_away = MatchEvent::Goal.where(match_id: id, team_id: team_id_away).where('player2_id IS NOT NULL').count
+		self.assists_home = MatchEvent::Goal.where(match_id: id, event_team_id: team_id_home).where('player2_id IS NOT NULL').count
+		self.assists_away = MatchEvent::Goal.where(match_id: id, event_team_id: team_id_away).where('player2_id IS NOT NULL').count
 
-    self.cards_red_home = MatchEvent::Card.where(match_id: id, team_id: team_id_home).where('info like "%Red%"').count
-    self.cards_red_away = MatchEvent::Card.where(match_id: id, team_id: team_id_away).where('info like "%Red%"').count
+    self.cards_red_home = MatchEvent::Card.where(match_id: id, event_team_id: team_id_home).where('info like "%Red%"').count
+    self.cards_red_away = MatchEvent::Card.where(match_id: id, event_team_id: team_id_away).where('info like "%Red%"').count
 
-    self.cards_yellow_home = MatchEvent::Card.where(match_id: id, team_id: team_id_home).where('info in ("Yellow", "Second Yellow Card")').count
-    self.cards_yellow_away = MatchEvent::Card.where(match_id: id, team_id: team_id_away).where('info in ("Yellow", "Second Yellow Card")').count
+    self.cards_yellow_home = MatchEvent::Card.where(match_id: id, event_team_id: team_id_home).where('info in ("Yellow", "Second Yellow Card")').count
+    self.cards_yellow_away = MatchEvent::Card.where(match_id: id, event_team_id: team_id_away).where('info in ("Yellow", "Second Yellow Card")').count
 
 		save!
 	end

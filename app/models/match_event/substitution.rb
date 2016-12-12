@@ -8,7 +8,7 @@ module MatchEvent
 
     protected
     def self.find_or_init_from_data(match_id, match_event_data)
-      self.find_or_initialize_by_match_id_and_team_id_and_minute_and_additional_minute_and_player1_id(match_id: match_id, team_id: match_event_data['team']['teamId'], minute: match_event_data['time']['minutes'], additional_minute: match_event_data['time']['additionalMinutes'], player1_id: match_event_data['playerOut']['playerId'])
+      self.find_or_initialize_by_match_id_and_event_team_id_and_minute_and_additional_minute_and_player1_id(match_id: match_id, event_team_id: match_event_data['team']['teamId'], minute: match_event_data['time']['minutes'], additional_minute: match_event_data['time']['additionalMinutes'], player1_id: match_event_data['playerOut']['playerId'])
     end    
   end
 end

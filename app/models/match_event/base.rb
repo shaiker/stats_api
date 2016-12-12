@@ -11,7 +11,7 @@ module MatchEvent
     end    
 
 
-    attr_accessible :match_id, :team_id, :minute, :additional_minute, :player1_id, :league_id, :season_id, :start_time, :half_start_time, :status, :round, :team_id_home, :team_name_home, :goals_home, :goals_half_time_home, :penalty_goals_home, :team_id_away, :team_name_away, :goals_away, :goals_half_time_away, :penalty_goals_away, :info, :time
+    attr_accessible :match_id, :event_team_id, :minute, :additional_minute, :player1_id, :league_id, :season_id, :start_time, :half_start_time, :status, :round, :team_id_home, :team_name_home, :goals_home, :goals_half_time_home, :penalty_goals_home, :team_id_away, :team_name_away, :goals_away, :goals_half_time_away, :penalty_goals_away, :info, :time
 
     PLAY_EVENT_INFO_MAP = {
       17 => 'Penalty',
@@ -53,7 +53,7 @@ module MatchEvent
 
     protected
     def self.find_or_init_from_data(match_id, match_event_data)
-      self.find_or_initialize_by_match_id_and_team_id_and_minute_and_additional_minute_and_player1_id(match_id: match_id, team_id: match_event_data['team']['teamId'], minute: match_event_data['time']['minutes'], additional_minute: match_event_data['time']['additionalMinutes'], player1_id: match_event_data['player']['playerId'])
+      self.find_or_initialize_by_match_id_and_event_team_id_and_minute_and_additional_minute_and_player1_id(match_id: match_id, event_team_id: match_event_data['team']['teamId'], minute: match_event_data['time']['minutes'], additional_minute: match_event_data['time']['additionalMinutes'], player1_id: match_event_data['player']['playerId'])
     end
   end
 end
