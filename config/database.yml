@@ -20,3 +20,12 @@ test:
   username: root
   password:
 
+production:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: football_data_machine_production
+  pool: 5
+  host: maindb.covygrhvpkum.us-east-1.rds.amazonaws.com
+  username: neymar
+  password: catinthebag
