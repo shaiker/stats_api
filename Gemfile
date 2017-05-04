@@ -7,6 +7,10 @@ gem 'rails', '3.2.14'
 
 gem 'mysql2', '~> 0.3.17'
 gem 'activerecord-native_db_types_override'
+gem 'activesupport', '= 3.2.14'
+gem 'activemodel', '= 3.2.14'
+gem 'arel', '~> 3.0.2'
+gem 'tzinfo', '~> 0.3.29'
 
 # Gems used only for assets and not required
 # in production environments by default.
