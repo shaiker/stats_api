@@ -1,3 +1,5 @@
+require 'net/http'
+
 class SoccerApi
 
 	PREMIER_LEAGUE_PATH = 'epl'
