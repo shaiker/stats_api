@@ -10,6 +10,7 @@ gem 'activerecord-native_db_types_override'
 
 
 gem 'puma'
+gem 'rack', '~> 1.6.8'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
