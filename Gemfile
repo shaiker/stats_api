@@ -9,7 +9,7 @@ gem 'mysql2', '~> 0.3.17'
 gem 'activerecord-native_db_types_override'
 
 
-gem 'passenger'
+gem 'puma'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
