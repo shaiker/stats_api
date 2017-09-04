@@ -1,0 +1,7 @@
+development:
+  redis: 
+    host: '127.0.0.1'
+  
+production:
+  redis: 
+    host: production-redis.r8nvtu.0001.use1.cache.amazonaws.com

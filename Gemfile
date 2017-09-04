@@ -7,7 +7,7 @@ gem 'rails', '3.2.14'
 
 gem 'mysql2', '~> 0.3.17'
 gem 'activerecord-native_db_types_override'
-
+gem 'redis', '= 3.1'
 
 gem 'puma'
 gem 'rack', '~> 1.6.8'
