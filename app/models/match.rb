@@ -5,6 +5,7 @@ class Match < ActiveRecord::Base
 
 
   def self.from_api_for_team_and_season(team, season)
+    updated_matches = []
   	begin
 	  	api = SoccerApi.new
 			response = api.matches_for_team_and_season(team.id, season.year_start)
@@ -12,7 +13,7 @@ class Match < ActiveRecord::Base
 			matches_data = response['league']['season']['eventType'].first['events']
 			matches_data.each do |match_data|
 				match = Match.find_or_initialize_by_remote_id_and_remote_source(remote_id: match_data['eventId'], remote_source: 'Stats')
-				next if match.status == 'Final' || match_data['eventStatus']['name'].in?(NO_GAME_STATUS)
+				next if match.status == 'Final' # || match_data['eventStatus']['name'].in?(NO_GAME_STATUS)
 
 				match.league_id = response['league']['leagueId']
 				match.season_id = season.id
@@ -33,10 +34,12 @@ class Match < ActiveRecord::Base
 				match.goals_away = away_team_data['score']
 
 				match.save!
+        updated_matches << match
 			end
-		rescue SoccerApi::DataNotFoundError => e
-			puts "******* Cant find data for #{team.name} in season #{season.year}"
-		end
+  	rescue SoccerApi::DataNotFoundError => e
+  		puts "******* Cant find data for #{team.name} in season #{season.year}"
+  	end
+    return updated_matches
 	end
 
 	def fill_match_data(match_data)
